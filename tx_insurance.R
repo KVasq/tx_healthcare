@@ -53,10 +53,17 @@ summary(lm(hs_degree ~ ethnicity_latino, data = samples)) # ***
 abline(lm(is_insured ~ ethnicity_latino, data = samples))
 plot(is_insured ~ ethnicity_latino, data = samples)
 
-# Option 1 - Outreach Strategy to reach as many uninsured cosumers as possible
+# Option 1 - Outreach Strategy to reach as many uninsured consumers as possible
 # Step 1. Identify which mode will reach the most amount of uninsured people with the least money
 # Step 2. Plan to add a new mode and decide amount of allocation to both
 # Step 3. Decide test to inform allocation plan 
+
+insurance_rates <- merge(insurance_rates, county_key, by.x = "county", by.y = "censuskey")
+
+county_region$demo_county_name <- toupper(county_region$demo_county_name) 
+insurance_rates <- merge(insurance_rates, county_region, by.x = "county_name", by.y = "demo_county_name")
+
+
 
 # Option 2 - Design data pipeline to track people's registration over time
 # Step 1. Decide type of database and data loading method
