@@ -3,9 +3,9 @@
     "path": "~/Personal Projects/tx_healthcare/tx_insurance.R",
     "project_path": "tx_insurance.R",
     "type": "r_source",
-    "hash": "513361402",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1625859859063.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "3,0",
-        "scrollLine": "0"
+        "cursorPosition": "67,0",
+        "scrollLine": "43"
     },
     "folds": "",
-    "lastKnownWriteTime": 1625859996,
+    "lastKnownWriteTime": 1625936829,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1625859996249,
+    "last_content_update": 1625941095787,
     "read_only": false,
     "read_only_alternatives": []
 }

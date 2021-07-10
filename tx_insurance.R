@@ -52,3 +52,12 @@ summary(lm(hs_degree ~ ethnicity_latino, data = samples)) # ***
 
 abline(lm(is_insured ~ ethnicity_latino, data = samples))
 plot(is_insured ~ ethnicity_latino, data = samples)
+
+# Option 1 - Outreach Strategy to reach as many uninsured cosumers as possible
+# Step 1. Identify which mode will reach the most amount of uninsured people with the least money
+# Step 2. Plan to add a new mode and decide amount of allocation to both
+# Step 3. Decide test to inform allocation plan 
+
+# Option 2 - Design data pipeline to track people's registration over time
+# Step 1. Decide type of database and data loading method
+# Step 2. Decide how to automate data analysis process so key metrics can be reviewed any time
