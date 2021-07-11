@@ -7,6 +7,8 @@ demographics <- read.csv("tx_county_summary.csv")
 samples <- read.csv("data_day_sample_20180410_export.csv")
 county_region <- read.csv("county_to_media_region.csv")
 
+county_age <- read.csv("alldata.csv")
+
 county_key <- demographics %>% summarise(county_name, censuskey)
 
 #What type of people are insured and uninsured?
@@ -55,13 +57,27 @@ plot(is_insured ~ ethnicity_latino, data = samples)
 
 # Option 1 - Outreach Strategy to reach as many uninsured consumers as possible
 # Step 1. Identify which mode will reach the most amount of uninsured people with the least money
+# - Identify which county has the most uninsured people: 
 # Step 2. Plan to add a new mode and decide amount of allocation to both
 # Step 3. Decide test to inform allocation plan 
+# Buy a TV ad block and mail for 5000 people and see which one has a higher turnover rate.
 
-insurance_rates <- merge(insurance_rates, county_key, by.x = "county", by.y = "censuskey")
+county <- merge(insurance_rates, county_key, by.x = "county", by.y = "censuskey")
 
 county_region$demo_county_name <- toupper(county_region$demo_county_name) 
-insurance_rates <- merge(insurance_rates, county_region, by.x = "county_name", by.y = "demo_county_name")
+county <- merge(county, county_region, by.x = "county_name", by.y = "demo_county_name")
+
+#Identify region with most uninsured people
+
+by_region <- group_by(county, tx_media_region)
+by_region %>% summarize(pct.insurance = mean(as.numeric(pct.insurance)))
+
+#TV - We can afford 20 ad blocks in the cheapest region, reaching 100,000 people
+
+#Mail - Mailing only 1 county let's us afford to mail 96,000 of which we can assume 72,000 will receive
+
+#FB - The cheapest bucket lets us reach 200,000 people, the older people are the more likely they are to be insured
+# those above 65 are around 10-12% likely to be uninsured
 
 
 
