@@ -79,7 +79,22 @@ by_region %>% summarize(pct.insurance = mean(as.numeric(pct.insurance)))
 #FB - The cheapest bucket lets us reach 200,000 people, the older people are the more likely they are to be insured
 # those above 65 are around 10-12% likely to be uninsured
 
+#determine how many people aged 65+ there are in each county and estimate uninsured
 
+over64_pop <- county_age[county_age$Age >= 65,] %>% summarise(County, Age, Total)
+over64_pop <- over64_pop[!over64_pop$Age %in% c("All Ages", "7 Years", "8 Years", "9 Years"),]
+
+over64_county <- aggregate(group_by(over64_pop, County)$Total, FUN=sum, by = list(over64_pop$County))
+colnames(over64_county) <- c("county", "total_over64")
+over64_county$estimated_uninsured <- over64_county$total_over64 * .1
+over64_county <- over64_county[over64_county$county != "STATE OF TEXAS",]
+
+over64_county[which.max(over64_county$total_over64),] #Harris county has the highest pop of 65+ years - 490,000, 200,000 clicks 20,000 uninsured clicks
+
+#The next cheapest bucket is ages 36-64 
+#Find percentage of insured in age bucket per county
+#16% of age group in harris county is uninsured - can expect 16,000 to click ad
+group_by(samples[between(samples$age, 36, 64),], county_name) %>% xtabs(data =., ~ is_insured + county_name)
 
 # Option 2 - Design data pipeline to track people's registration over time
 # Step 1. Decide type of database and data loading method
